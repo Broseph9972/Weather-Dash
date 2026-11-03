@@ -1,0 +1,36 @@
+<div class="weather-dashboard__content">
+  {% assign temperature_unit = "°" %}
+  {% if current_weather.temperature_unit == "°F" %}
+    {% assign temperature_unit = "°F" %}
+  {% elsif current_weather.temperature_unit == "°C" %}
+    {% assign temperature_unit = "°C" %}
+  {% endif %}
+
+  <div class="weather-dashboard flex flex--col flex--stretch-x gap--large">
+    <div class="flex flex--between flex--align-center">
+      <div>
+        <div class="title">Weather Dashboard</div>
+        <div class="label">Current conditions</div>
+      </div>
+      <div class="label">{{ current_weather.time }}</div>
+    </div>
+
+    <div class="flex flex--between flex--align-center">
+      <div>
+        <div class="weather-dashboard__current">{{ current_weather.temperature }}{{ temperature_unit }}</div>
+        <div class="description">Wind {{ current_weather.windspeed }} mph</div>
+      </div>
+      <div class="value value--large">Code {{ current_weather.weathercode }}</div>
+    </div>
+
+    <div class="weather-dashboard__forecast flex flex--stretch-x gap--small">
+      {% for date in daily.time limit: 3 %}
+        <div class="card flex flex--col flex--center flex--stretch-x">
+          <div class="label">{{ date }}</div>
+          <div class="value">{{ daily.temperature_2m_max[forloop.index0] }}{{ temperature_unit }}</div>
+          <div class="description">{{ daily.temperature_2m_min[forloop.index0] }}{{ temperature_unit }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+---
+strategy: polling
+no_screen_padding: "yes"
+dark_mode: "no"
+framework_version: "3.3.1"
+polling_verb: get
+polling_url: "https://api.open-meteo.com/v1/forecast?latitude={{ latitude }}&longitude={{ longitude }}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit={{ units }}&windspeed_unit=mph&timezone=auto"
+polling_headers: ""
+polling_body: ""
+oauth_enabled: "false"
+custom_fields:
+  - keyname: latitude
+    field_type: text
+    name: Latitude
+    description: "Latitude for the forecast location."
+    default: "42.36"
+    required: true
+  - keyname: longitude
+    field_type: text
+    name: Longitude
+    description: "Longitude for the forecast location."
+    default: "-71.06"
+    required: true
+  - keyname: units
+    field_type: select
+    name: Temperature units
+    description: "Choose the temperature unit used by the forecast."
+    default: fahrenheit
+    options:
+      - fahrenheit
+      - celsius
